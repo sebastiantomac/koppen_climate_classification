@@ -24,7 +24,7 @@ namespace KoppenClimate
         int[] Pthreshold; // 2×MAT + 28 if > 70 % of precipitation falls in summer, otherwise Pthreshold = 2×MAT + 14.Summer(winter) is the six - month period that is warmer(colder) between April - September and October-March.
         int[] hPsummer;
 
-        Boolean PMIP3 = false;
+        Boolean PMIP3 = true;
 
         static void Main(string[] args)
         {
@@ -98,7 +98,7 @@ namespace KoppenClimate
                 // Console.WriteLine("X:Y " + i + " " + i * W);
 
                 koppenGeiger.clear(width);
-                koppenGeiger.calculateMaps(precs, tmeans, NUM_MONTH, width, i>=(height/2));
+                koppenGeiger.calculateMaps(precs, tmeans, NUM_MONTH, width, i<=(height/2));
                 koppenGeiger.calculateKoppen(koppen, 0, width);
 
                 ba.WriteRaster(0, i, width, 1, koppen, width, 1, 0, 0);
@@ -343,7 +343,7 @@ namespace KoppenClimate
                             koppen[pos + i] = KGClimateZones.Csb;
 
                         }
-                        else if (Tmon10[i] > 1 && Tmon10[i] < 4) // Cold summer 
+                        else if (Tmon10[i] >= 1 && Tmon10[i] < 4) // Cold summer 
                         {
                             koppen[pos + i] = KGClimateZones.Csc;
                         }
@@ -362,7 +362,7 @@ namespace KoppenClimate
                         {
                             koppen[pos + i] = KGClimateZones.Cwb;
                         }
-                        else if (Tmon10[i] > 1 && Tmon10[i] < 4) // Cold summer 
+                        else if (Tmon10[i] >= 1 && Tmon10[i] < 4) // Cold summer 
                         {
                             koppen[pos + i] = KGClimateZones.Cwc;
                         }
@@ -381,7 +381,7 @@ namespace KoppenClimate
                         {
                             koppen[pos + i] = KGClimateZones.Cfb;
                         }
-                        else if (Tmon10[i] > 1 && Tmon10[i] < 4) // Cold summer 
+                        else if (Tmon10[i] >= 1 && Tmon10[i] < 4) // Cold summer 
                         {
                             koppen[pos + i] = KGClimateZones.Cfc;
                         }
@@ -393,7 +393,7 @@ namespace KoppenClimate
                 }
                 else if (Thot[i] > 10 && Tcold[i] <= 0) // Cold
                 {
-                    if (Psdry[i] < 40 && (Psdry[i] < Pwwet[i] / 3)) // Dry summer 
+                    if (Psdry[i] >= 0 && Psdry[i] < 40 && (Psdry[i] < (Pwwet[i] / 3))) // Dry summer 
                     {
                         if (Thot[i] >= 22) // Hot summer 
                         {
@@ -412,7 +412,7 @@ namespace KoppenClimate
                             koppen[pos + i] = KGClimateZones.Dsc;
                         }
                     }
-                    else if (Pwdry[i] < Pswet[i] / 10) // Dry winter 
+                    else if (Pwdry[i] >= 0 && Pwdry[i] < (Pswet[i] / 10)) // Dry winter 
                     {
                         if (Thot[i] >= 22) // Hot summer 
                         {

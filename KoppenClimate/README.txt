@@ -13,3 +13,8 @@ Pswet = precipitation in the wettest month in summer (mm month-1);
 Pwwet = precipitation in the wettest month in winter (mm month-1);
 Pthreshold=2×MAT+28 if >70% of precipitation falls in summer, otherwise Pthreshold=2×MAT+14. Summer (winter) is the six-month period that is warmer (colder) between April-September and October-March.
 
+
+Prec and Tmean data
+http://chelsa-climate.org/downloads/
+Elevation data
+https://www.ngdc.noaa.gov/mgg/global/global.html
