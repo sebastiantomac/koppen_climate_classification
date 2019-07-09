@@ -1,0 +1,6 @@
+data
+KoppenClimate/.vs
+KoppenClimate/bin
+KoppenClimate/obj
+KoppenClimate/Properties/launchSettings.json
+tmp_*.tif
