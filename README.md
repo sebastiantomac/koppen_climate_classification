@@ -1,7 +1,7 @@
 # Köppen Geiger Climate Classification
 Köppen climate classificatior in C#
 
-Example based on CHELSA [last glacial maximum climate](http://chelsa-climate.org/last-glacial-maximum-climate/)
+Example based on CHELSA PMIP3_MPI_ESM_P [last glacial maximum climate](http://chelsa-climate.org/last-glacial-maximum-climate/)
 
 ![last glacial maximum climate](https://github.com/sebastiantomac/koppen_climate_classification/blob/master/doc/k%C3%B6ppen_LGM.jpg)
 

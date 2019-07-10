@@ -24,7 +24,8 @@ namespace KoppenClimate
         int[] Pthreshold; // 2×MAT + 28 if > 70 % of precipitation falls in summer, otherwise Pthreshold = 2×MAT + 14.Summer(winter) is the six - month period that is warmer(colder) between April - September and October-March.
         int[] hPsummer;
 
-        Boolean PMIP3 = true;
+        Boolean PMIP3_CNRM_CM5 = false;
+        Boolean PMIP3_MPI_ESM_P = true;
 
         static void Main(string[] args)
         {
@@ -35,12 +36,17 @@ namespace KoppenClimate
             String precsFileNames = @"data\CHELSA\CHELSA_prec_";
             String outFileName = "tmp_CHELSA.tif";
 
-            if (koppenGeiger.PMIP3)
+            if (koppenGeiger.PMIP3_CNRM_CM5)
             {
-                tmeansFileNames = @"data\PMIP3\CHELSA_PMIP_CNRM-CM5_tmean_";
-                precsFileNames = @"data\PMIP3\CHELSA_PMIP_CNRM-CM5_prec_";
+                tmeansFileNames = @"data\PMIP3\PMIP3_CNRM_CM5\CHELSA_PMIP_CNRM-CM5_tmean_";
+                precsFileNames = @"data\PMIP3\PMIP3_CNRM_CM5\CHELSA_PMIP_CNRM-CM5_prec_";
                 outFileName = "tmp_PMIP3.tif";
 
+            } else if (koppenGeiger.PMIP3_MPI_ESM_P)
+            {
+                tmeansFileNames = @"data\PMIP3\PMIP3_MPI_ESM_P\CHELSA_PMIP_MPI-ESM-P_tmean_";
+                precsFileNames = @"data\PMIP3\PMIP3_MPI_ESM_P\CHELSA_PMIP_MPI-ESM-P_prec_";
+                outFileName = "tmp_PMIP3_MPI_ESM_P.tif";
             }
 
             GdalConfiguration.ConfigureGdal();
@@ -512,7 +518,7 @@ namespace KoppenClimate
 
         string getFileNameTemp(string tmeansFileNames, int month)
         {
-            if (PMIP3)
+            if (PMIP3_CNRM_CM5 || PMIP3_MPI_ESM_P)
             {
                 return tmeansFileNames + month + "_1.tif";
             }
@@ -524,7 +530,7 @@ namespace KoppenClimate
 
         private string getFileNamePrec(string precsFileNames, int month)
         {
-            if (PMIP3)
+            if (PMIP3_CNRM_CM5 || PMIP3_MPI_ESM_P)
             {
                 return precsFileNames + month + "_1.tif";
             }
@@ -536,7 +542,7 @@ namespace KoppenClimate
 
     int convertTemp(int temp)
         {
-            if (PMIP3) // Temperatures in Kelvin/10
+            if (PMIP3_CNRM_CM5 || PMIP3_MPI_ESM_P) // Temperatures in Kelvin/10
             {
                 return temp / 10 - 273; ;
             }
@@ -548,7 +554,7 @@ namespace KoppenClimate
 
         short convertPrec(short prec)
         {
-            if (PMIP3) // Precipitation in mm/10
+            if (PMIP3_CNRM_CM5 || PMIP3_MPI_ESM_P) // Precipitation in mm/10
             {
                 return (short)(prec / 10);
             }

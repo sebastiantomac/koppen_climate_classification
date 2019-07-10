@@ -3,4 +3,6 @@ KoppenClimate/.vs
 KoppenClimate/bin
 KoppenClimate/obj
 KoppenClimate/Properties/launchSettings.json
-tmp_*.tif
+tmp_*.tif*
+.idea
+.ipynb_checkpoints
