@@ -29,6 +29,16 @@ namespace KoppenClimate
 
         static void Main(string[] args)
         {
+            if (args[0] != null && args[0].StartsWith("h"))
+            {
+                Hydrology hydrology = new Hydrology();
+                hydrology.init();
+                hydrology.run();
+                return;
+            }
+
+
+
             KoppenGeiger koppenGeiger = new KoppenGeiger();
 
             // CHELSA - now
